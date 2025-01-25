@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Game Đoán Số</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        #game-container {
+            margin-top: 50px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chào mừng bảo bối đến với mini game đoán số! 🥰</h1>
+    <div id="game-container">
+        <p id="message">Anh đã chọn một số từ 1 đến 100, đoán xem nào!</p>
+        <input type="number" id="guess" placeholder="Nhập số của bảo bối">
+        <button onclick="checkGuess()">Đoán</button>
+        <button onclick="resetGame()">Chơi lại</button>
+    </div>
+
+    <script>
+        let numberToGuess = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            let guess = parseInt(document.getElementById("guess").value);
+            attempts++;
+            let message = "";
+
+            if (isNaN(guess)) {
+                message = "Ơ kìa bảo bối, nhập số thôi nhaa! 😆";
+            } else if (guess < numberToGuess) {
+                message = "Số anh chọn lớn hơn nè, đoán lại đi bảo bối ơi! 😘";
+            } else if (guess > numberToGuess) {
+                message = "Số anh chọn nhỏ hơn nha, thử lại đi nàooo! 💞";
+            } else {
+                message = `Chúc mừng bảo bối, đoán đúng rồiii! 🎉 Bảo bối mất ${attempts} lần đoán đó nha!`;
+                alert(message);
+                resetGame();
+            }
+            document.getElementById("message").innerText = message;
+        }
+
+        function resetGame() {
+            numberToGuess = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            document.getElementById("message").innerText = "Anh đã chọn một số từ 1 đến 100, đoán xem nào!";
+            document.getElementById("guess").value = "";
+        }
+    </script>
+</body>
+</html>
